@@ -29,12 +29,12 @@ def convert_image_to_html(image):
     html_image = f'<img src="data:image/jpeg;base64,{encoded_string}" alt="image">'
     return html_image
 
-def save_to_mongodb(html_content, collectionName):
+def save_to_mongodb(html_content):
     # Verbindet sich mit dem MongoDB-Client (Standardport 27017)
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('192.168.0.100', 27017)
     # Wählt die Datenbank und die Sammlung aus
     db = client['Weatherstation']
-    collection = db[collectionName]
+    collection = db['images']
     
     # Aktuellen Zeitstempel erzeugen
     timestamp = datetime.now().isoformat()
@@ -51,4 +51,4 @@ def save_to_mongodb(html_content, collectionName):
 if __name__ == "__main__":
     image = capture_image()  # Bild aufnehmen
     html_image = convert_image_to_html(image) # Bild in HTML umwandeln
-    save_to_mongodb(html_image, 'images')  # HTML in MongoDB speichern
+    save_to_mongodb(html_image)  # HTML in MongoDB speichern
