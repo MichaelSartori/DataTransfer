@@ -31,8 +31,10 @@ def convert_image_to_html(image):
     return html_image
 
 def save_to_mongodb(html_content):
-    # Verbindet sich mit dem MongoDB-Client (Standardport 27017)
-    client = MongoClient('192.168.0.100', 27017)
+    # Connection string
+    connection_string = "mongodb://admin:SUPERSECRETPASSWORD@192.168.0.100:27017/"
+    # Verbindet sich mit dem MongoDB-Client
+    client = MongoClient(connection_string)
     try:
         # Wählt die Datenbank und die Sammlung aus
         db = client['Weatherstation']
